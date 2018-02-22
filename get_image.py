@@ -122,7 +122,7 @@ def get_images():
 
    #Store all information into csv
    rows = zip(title_list, author_list, url_list, file_path_list, top_com_list)
-   csv_file = ".\\pic_data.csv"
+   csv_file = config.CSV
 
    csv_counter = 0
    with open(csv_file, "w", newline='') as o:
