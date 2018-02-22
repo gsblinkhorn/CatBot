@@ -8,7 +8,7 @@ Boolean used to enable/disable the download step. Images are downloaded from Red
 ### 'Storage Paths'
 Change the paths for each of the necessary storage structures - local directory and csv
 
-### Bot Parameters
+### 'Bot Parameters'
 After creating your own Reddit bot, store the necessary values here
 
 ### 'Known Emails & Mailing Lists'
