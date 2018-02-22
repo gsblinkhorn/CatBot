@@ -19,7 +19,9 @@ USER & PASS are the username and password to the email account you wish to send 
 
 # Running the Program
 1 - Download all files into local directory
+
 2 - Initialize your config file (Bot params, email params, mailing list)
+
 3 - Execute the driver.py file. 
 
 Print-outs should appear in the terminal as the program executes. Upon successful completion, the email should be received by all addresses in your TO list. The program will terminate after successfully sending the email.
