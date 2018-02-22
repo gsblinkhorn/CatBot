@@ -1,5 +1,5 @@
 # Cat-Bot
-'Cat-Bot' is a Python-powered (Python 3.6.4), Reddit-scraping application for automatically generating and emailing a cat-themed newsletter, 'The Feline Fanatic'. In order to run the program, download all files into a local directory. With some simple tweaks to the config.py file, the driver file will be ready to execute. If Python 3 is not installed, you will need to download and install that as well. [Download Python 3 here](https://www.python.org/downloads/). This program was designed on a Windows machine - Mac and Linux functionality not guaranteed. 
+'Cat-Bot' is a Python-powered (Python 3.6.4), Reddit-scraping application for automatically generating and emailing a cat-themed newsletter, 'The Feline Fanatic'. In order to run the program, download all files into a local directory. With some simple tweaks to the config.py file, the driver file will be ready to execute. If Python 3 is not installed, you will need to download and install that as well. [Download Python 3 here](https://www.python.org/downloads/). This program was designed on a Windows machine - Mac and Linux functionality not guaranteed. You will need a Reddit bot account to login with and a gmail address to send the message from. 
 
 # config
 ### 'Trigger Image Download'
