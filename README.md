@@ -8,6 +8,9 @@ Boolean used to enable/disable the download step. Images are downloaded from Red
 ### 'Storage Paths'
 Change the paths for each of the necessary storage structures - local directory and csv
 
+### Bot Parameters
+After creating your own Reddit bot, store the necessary values here
+
 ### 'Known Emails & Mailing Lists'
 Email addresses should be stored as strings. These addresses can then be stored in a list of addresses. This list will be what is passed to the program. 
 
