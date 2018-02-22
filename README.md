@@ -9,7 +9,7 @@ Boolean used to enable/disable the download step. Images are downloaded from Red
 Change the paths for each of the necessary storage structures - local directory and csv
 
 ### 'Bot Parameters'
-After creating your own Reddit bot, store the necessary values here
+After creating your own Reddit bot ([Instructions Here](http://pythonforengineers.com/build-a-reddit-bot-part-1/)), store the necessary values here
 
 ### 'Known Emails & Mailing Lists'
 Email addresses should be stored as strings. These addresses can then be stored in a list of addresses. This list will be what is passed to the program. 
@@ -18,4 +18,8 @@ Email addresses should be stored as strings. These addresses can then be stored 
 USER & PASS are the username and password to the email account you wish to send from, stored as strings. Currently, the program is hard-coded to work with gmail accounts only. By default, gmail will prevent this bot from logging in. In order to bypass this security measure, you will need to allow less secure apps on your account ([Instructions here](https://support.google.com/accounts/answer/6010255?hl=en)). For this reason, I created a new gmail account solely to be used as the sender rather than use a personal one. 
 
 # Running the Program
-After downloading all files and setting up your config file, execute the driver.py file. Print-outs should appear in the terminal as the program executes. Upon successful completion, the email should be received by all addresses in your TO list. The program will terminate after successfully sending the email.
+1 - Download all files into local directory
+2 - Initialize your config file (Bot params, email params, mailing list)
+3 - Execute the driver.py file. 
+
+Print-outs should appear in the terminal as the program executes. Upon successful completion, the email should be received by all addresses in your TO list. The program will terminate after successfully sending the email.
