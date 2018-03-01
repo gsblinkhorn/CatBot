@@ -26,14 +26,9 @@ def get_images():
                         user_agent = config.USER_AGENT)
 
    # Initializes Subreddit instance from multiple subreddits
-   cats = reddit.subreddit('cats' +
-                           '+MEOW_IRL' +
-                           '+Kittens' +
-                           '+TuckedInKitties' +
-                           '+Floof' +
-                           '+CatsInBusinessAttire' +
-                           '+CatCircles' +
-                           '+CatPictures').top('day', limit=30)
+   subreddits = ["cats","MEOW_IRL","Kittens","TuckedInKitties","Floof",
+                 "CatsInBusinessAttire","CatCircles","CatPictures"]
+   cats = reddit.subreddit('+'.join(subreddits)).top('day', limit=30)
    
    # Remove old pictures from storage file
    print("Cleaning picture storage...")
