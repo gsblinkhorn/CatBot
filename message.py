@@ -40,9 +40,9 @@ def generate_email():
     with open(config.CSV, 'r') as f:
         reader = csv.reader(f)
         for row in reader:
-            title_list.append(row[0])
-            author_list.append(row[1])
-            url_list.append(row[2])
+            url_list.append(row[0])
+            title_list.append(row[1])
+            author_list.append(row[2])
             jpg_path_list.append(row[3])
             top_com_list.append(row[4])
 

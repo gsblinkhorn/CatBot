@@ -9,6 +9,18 @@ from PIL import Image
 from resizeimage import resizeimage
 import os
 
+# Retrieves images and metadata from Reddit
+def get_images():
+   
+   cats = run_reddit() # cats is a Subreddit object which contains desired recent posts
+   clean_storage() # deletes previously downloaded pictures
+   post_tuples = get_metadata(cats) # Returns a list of 'post tuples' containing metadata about each post
+   post_tuples = download_pictures(post_tuples) # 'Post tuples' now includes path to relevant picture
+   store_to_csv(post_tuples) # Stores all relevant data in csv file per CONFIG setup
+
+
+##### Helper Functions #####
+
 # Creates a directory for storing pictures if it does not already exist
 def assure_path_exists(path):
    direc =(path)
@@ -39,35 +51,11 @@ def run_reddit():
    cats = reddit.subreddit('+'.join(subreddits)).top('day', limit=30)
    return cats
 
-# Retrieves images and metadata from Reddit
-def get_images():
+def get_metadata(cats): #Takes a Subreddit object as an argument
    
-   cats = run_reddit(); # cats is a Subreddit object
+   tuples = [] # (post.url, post.title, post.author, html_comments)
+   print("Retrieving posts")
    
-   clean_storage();
-   
- 
-   '''
-   Information to Gather:
-   #Individual Post Variables
-   url - string, target image url
-   title - string, title of post
-   top_com - string, top comment on post
-   tc_author - string, author of top comment
-
-   #Lists for storing information
-   url_list - list of urls
-   title_list - list of titles
-   author_list - list of authors
-   top_com_list - list of top comments
-   '''
-
-   url_list = []
-   title_list = []
-   author_list = []
-   top_com_list = []
-
-   print("Retrieving pictures")
    for post in cats:
       if(post.url.endswith('.jpg')):
          try:
@@ -79,14 +67,9 @@ def get_images():
             print("Post retrival error occured")
             continue
 
-         #If no error occurs while retrieving information, store information
-         url_list.append(url)
-         title_list.append(title)
-         author_list.append(author)
-         all_comments = """<font size="3">"""
-
          #Formats comments into single line of HTML code to be directly inserted
          i=0
+         all_comments = """<font size="3">"""
          for com in comments:
             if len(com.body)<300: #Restricts comments to desired length
                try:
@@ -97,24 +80,26 @@ def get_images():
                   continue
                all_comments += "\"" + com.body + "\"<br> - /u/" + com.author.name + "<br><br><br>"
                i += 1
-            if i == 4: #this value denotes number of comments captured
+            if i == 4: #this value denotes number of desired comments to capture
                break
          all_comments += "</font>"
 
-         #Appends finished comment HTML code into list
-         top_com_list.append(all_comments)
+         #If no error occurs while retrieving information, store information
+         tuples.append((url,title,author,all_comments))
          print("Post retrieved successfully")
-               
-   # Download/store images from url
-   file_path_list = []
+
+   return tuples
+
+def download_pictures(post_tuples):
+   tuples = []  # (post.url, post.title, post.author, file_path, html_comments)
    store_file_path = ".\\daily_pics\\"
 
-   for url in url_list:
-      filename = url.split('/')[-1]#uses last part of address as file name
+   for url, title, author, html_comments in post_tuples: # (post.url, post.title, post.author, html_comments)
+      filename = url.split('/')[-1] # uses last part of address as file name
       file_path = store_file_path + filename
       try:
          urllib.request.urlretrieve(url, file_path)
-         file_path_list.append(file_path)
+         tuples.append((url, title, author, file_path, html_comments))
          with open(file_path,'rb') as f:
             with Image.open(f) as image:
                cover = resizeimage.resize_cover(image, [350,350], validate=False)
@@ -122,18 +107,18 @@ def get_images():
          print("Image downloaded successfully")
       except:
          print("Image download error occured")
-         
 
-   #Store all information into csv
-   rows = zip(title_list, author_list, url_list, file_path_list, top_com_list)
+   return tuples
+
+def store_to_csv(post_tuples):
    csv_file = config.CSV
-
    csv_counter = 0
+   
    with open(csv_file, "w", newline='') as o:
       writer = csv.writer(o)
-      for row in rows:
+      for post in post_tuples:
          try:
-            writer.writerow(row)
+            writer.writerow(post)
             print("Image added to CSV")
             csv_counter += 1
          except:
@@ -141,4 +126,3 @@ def get_images():
          if csv_counter == 10: #this value denotes the desired number of pictures in message
             break
       print("Image Data saved to CSV")
-
