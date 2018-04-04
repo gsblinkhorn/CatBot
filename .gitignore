@@ -1,2 +1,7 @@
 # ignore local config
 config.py
+
+# ignore generated folders/files
+/daily_pics/
+/__pycache__/
+/pic_data.csv
