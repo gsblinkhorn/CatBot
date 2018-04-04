@@ -16,8 +16,16 @@ def assure_path_exists(path):
       os.makedirs(direc)
       print("Directory %s created." %direc)
 
-# Retrieves images and metadata from Reddit
-def get_images():
+# Remove old pictures from storage file
+def clean_storage():
+   print("Cleaning picture storage...")
+   assure_path_exists(config.STORAGE_PATH)
+   fileList = os.listdir(config.STORAGE_PATH)
+   for fileName in fileList:
+      os.remove(config.STORAGE_PATH+"/"+fileName)
+   print("Storage cleaned.")
+
+def run_reddit():
    # Initializes Reddit instance using bot's params
    reddit = praw.Reddit(client_id = config.BOT_ID,
                         client_secret = config.CLIENT_SECRET,
@@ -29,14 +37,15 @@ def get_images():
    subreddits = ["cats","MEOW_IRL","Kittens","TuckedInKitties","Floof",
                  "CatsInBusinessAttire","CatCircles","CatPictures"]
    cats = reddit.subreddit('+'.join(subreddits)).top('day', limit=30)
+   return cats
+
+# Retrieves images and metadata from Reddit
+def get_images():
    
-   # Remove old pictures from storage file
-   print("Cleaning picture storage...")
-   assure_path_exists(config.STORAGE_PATH)
-   fileList = os.listdir(config.STORAGE_PATH)
-   for fileName in fileList:
-      os.remove(config.STORAGE_PATH+"/"+fileName)
-   print("Storage cleaned.")
+   cats = run_reddit(); # cats is a Subreddit object
+   
+   clean_storage();
+   
  
    '''
    Information to Gather:
