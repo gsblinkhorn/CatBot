@@ -1,6 +1,4 @@
 import praw #Reddit API
-import numpy as np
-import pandas as pd
 import urllib
 import config
 import csv
