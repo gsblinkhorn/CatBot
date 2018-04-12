@@ -4,7 +4,6 @@ import config
 import csv
 import shutil #remove files
 from PIL import Image
-from resizeimage import resizeimage
 import os
 
 # Retrieves images and metadata from Reddit
@@ -92,17 +91,19 @@ def get_pic_path(url):
    store_file_path = ".\\daily_pics\\"
    filename = url.split('/')[-1] # uses last part of address as file name
    file_path = store_file_path + filename
-   
+
    try:
       urllib.request.urlretrieve(url, file_path)
-      with open(file_path,'rb') as f:
-         with Image.open(f) as image:
-            cover = resizeimage.resize_cover(image, [350,350], validate=False)
-            cover.save(file_path, image.format)
+      basewidth = 300
+      with Image.open(file_path) as img:
+         wpercent = (basewidth/float(img.size[0]))
+         hsize = int((float(img.size[1])*float(wpercent)))
+         img = img.resize((basewidth,hsize), Image.ANTIALIAS)
+         img.save(file_path)
       return file_path
    except:
       print("Image download error occured")
-      return -1 # Flag that error occured
+      
 
 # Stores metadata into csv file
 def store_to_csv(post_tuple):
