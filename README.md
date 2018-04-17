@@ -32,7 +32,9 @@ Print-outs should appear in the terminal as the program executes. Upon successfu
 This script can be setup to run automatically on any computer with a reliable internet connection. Rather than use my laptop, I took this as an opportuntiy to get and learn how to use a Raspberry Pi. After setting up the Raspbian OS, I cloned the Github repository and tried using crontab to execute my python driver.py file at a given time - the command failed to  execute properly dispite numerous changes, but I eventually found a work-around. Rather than execute the driver file directly (python /path/to/file/driver.py), I created a bash script called job.sh that the crontab command executes instead (crontab command : * * * * * ~/job.sh).
 
 ### job.sh
-#!/bin/sh                                                                                                                          python /path/to/file/driver.py
+#!/bin/sh
+
+python /path/to/file/driver.py
 
 ### Trouble-shooting
 - Make sure Python 3 is your default Python. You can change the python version system-wide ([Instructions here](https://linuxconfig.org/how-to-change-from-default-to-alternative-python-version-on-debian-linux)) 
