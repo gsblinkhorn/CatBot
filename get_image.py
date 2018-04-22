@@ -77,11 +77,11 @@ def get_metadata(cats): #Takes a Subreddit object as an argument
 def get_html_coms(comments):
    all_comments = """<font size="3">"""
    for i,com in enumerate(comments):
+      if i == 4: #this value denotes number of desired comments to capture
+         break
       if len(com.body)<300: #Restricts comments to desired length
          all_comments += "\"" + com.body + "\"<br> - /u/" 
          all_comments += "" + com.author.name + "<br><br><br>"
-      if i == 4: #this value denotes number of desired comments to capture
-         break
    all_comments += "</font>"
 
    return all_comments
