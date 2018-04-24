@@ -33,9 +33,13 @@ This script can be setup to run automatically on any computer with a reliable in
 
 ### job.sh - Pulls latest source code and executes
 #!/bin/sh
+
 python --version
+
 cd /path/to/local/repo/Cat-Bot
+
 git pull origin master
+
 python /home/pi/Desktop/Github/Cat-Bot/driver.py
 
 
