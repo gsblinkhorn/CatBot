@@ -31,10 +31,13 @@ Print-outs should appear in the terminal as the program executes. Upon successfu
 ## Raspberry Pi as a Dedicated Computer
 This script can be setup to run automatically on any computer with a reliable internet connection. Rather than use my laptop, I took this as an opportuntiy to get and learn how to use a Raspberry Pi. After setting up the Raspbian OS, I cloned the Github repository and tried using Cron to execute my python driver.py file at a given time - the command failed to  execute properly despite numerous changes made to it, but I eventually found a work-around. Rather than execute the driver file directly (python /path/to/file/driver.py), I created a bash script called job.sh that the crontab command executes instead (crontab command : * * * * * ~/job.sh).
 
-### job.sh
+### job.sh - Pulls latest source code and executes
 #!/bin/sh
+python --version
+cd /path/to/local/repo/Cat-Bot
+git pull origin master
+python /home/pi/Desktop/Github/Cat-Bot/driver.py
 
-python /path/to/file/driver.py
 
 ### Trouble-shooting
 - Make sure Python 3 is your default Python. You can change the python version system-wide ([Instructions here](https://linuxconfig.org/how-to-change-from-default-to-alternative-python-version-on-debian-linux)) 
