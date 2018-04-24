@@ -22,6 +22,17 @@ def generate_html(image_html_list, title_list, author_list, top_com_list):
     <html>
       <head></head>
       <body>
+        <div style="background-color:#38b5e0;">
+          <!--[if gte mso 9]>
+            <v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t">
+            <v:fill type="tile" src="https://i.imgur.com/YJOX1PC.png" color="#38b5e0"/>
+            </v:background>
+          <![endif]-->
+        <table height="100%" width="100%" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+            <td valign="top" align="left" background="https://i.imgur.com/YJOX1PC.png">
+
+
         <p align="center"><b><font size="7">The Feline Fanatic</b></font><br>
         <p align="center"><i><font size="4">"Your Daily Dose of All Things Fluffball"</i></font><br><br>
         <hr>
@@ -33,7 +44,7 @@ def generate_html(image_html_list, title_list, author_list, top_com_list):
     
     for i,(img_code, title, author, comments) in enumerate(zip(image_html_list, title_list, author_list, top_com_list)):
         block = """
-        <table class="image" align="center">
+        <table class="image" align="center" bgcolor="#FFFFFF">
             <caption align="top"><b><font size="5">""" + str(title) + """<br>
                 - /u/""" + str(author) + """
             </font></b></caption><br>
@@ -49,6 +60,10 @@ def generate_html(image_html_list, title_list, author_list, top_com_list):
                                           a Reddit-scraping, Python-powered program developed by Garrett Blinkhorn</font><br>
                                           <a href=https://github.com/gsblinkhorn/cat-bot><font size ="1">Github Repository - Cat Bot</a></p>
         </p>
+        </td>
+        </tr>
+        </table>
+        </div>
       </body>
     </html>
     """ 
