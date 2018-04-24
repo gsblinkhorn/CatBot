@@ -17,8 +17,8 @@ def generate_html(image_html_list, title_list, author_list, top_com_list):
         <hr><br>
     """
     # Image HTML Generator 
-    counter = 0
-    for img_code, title, author, comments in zip(image_html_list, title_list, author_list, top_com_list):
+    
+    for i,(img_code, title, author, comments) in enumerate(zip(image_html_list, title_list, author_list, top_com_list)):
         block = """
         <table class="image" align="center">
             <caption align="top"><b><font size="5">""" + str(title) + """<br>
@@ -26,9 +26,9 @@ def generate_html(image_html_list, title_list, author_list, top_com_list):
             </font></b></caption><br>
         """
         
-        block = make_img_html(block, counter, img_code, comments) + "</table><br><hr>"
+        block = make_img_html(block, i, img_code, comments) + "</table><br><hr>"
         code += str(block)
-        counter += 1
+        
 
     # Email Footer HTML
     code += """
