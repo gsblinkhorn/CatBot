@@ -35,9 +35,8 @@ def generate_html(image_html_list, title_list, author_list, top_com_list):
 
     with open("html_template.html", "r") as file:
         code = file.read()
-        code.format(quote, quote_url_html, *block)
-        return code      
-    
+        code = code.format(quote, quote_url_html, *blocks)
+        return code   
     
 
 # This function causes images to display on alternating sides of the email message
