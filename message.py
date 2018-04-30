@@ -47,6 +47,11 @@ def generate_email():
             top_com_list.append(row[4])
 
     # Generate HTML code for images and add images to email message
+    with open("logo.png", 'rb') as pic:
+        msgImage = MIMEImage(pic.read())
+        msgImage.add_header('Content-ID', '<logo>')
+        msgRoot.attach(msgImage)
+        
     img_html_list = []
     for i, path in enumerate(jpg_path_list):        
         # Create/store an html img tag with unqiue id
