@@ -26,7 +26,7 @@ def generate_html(image_html_list, title_list, author_list, top_com_list):
 # Creates a block of html code containing the arguments 
 def make_block(counter, img_code, title, author, comments):
     block = """
-        <table class="image" align="center" bgcolor="#FFFFFF">
+        <table class="image" align="center" bgcolor="#FFFFFF" width="80%">
             <caption align="top"><b><font size="5">""" + str(title) + """
                 - /u/""" + str(author) + """
             </font></b></caption><br>
