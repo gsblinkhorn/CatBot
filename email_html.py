@@ -27,9 +27,12 @@ def generate_html(image_html_list, title_list, author_list, top_com_list):
 def make_block(counter, img_code, title, author, comments):
     block = """
         <table class="image" align="center" bgcolor="#FFFFFF" width="80%">
-            <caption align="top"><b><font size="5">""" + str(title) + """
-                - /u/""" + str(author) + """
-            </font></b></caption><br>
+            <tr align="center">
+                <th colspan="2"><b><font size="5">""" + str(title) + """
+                    - /u/""" + str(author) + """
+                </font></b></th>
+            </tr>
+            <br>
     """
         
     block = insert_image(block, counter, img_code, comments) + "</table><br><br>"
