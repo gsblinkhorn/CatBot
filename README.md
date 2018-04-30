@@ -40,7 +40,7 @@ cd /path/to/local/repo/Cat-Bot
 
 git pull origin master
 
-python /home/pi/Desktop/Github/Cat-Bot/driver.py
+python /path/to/local/repo/Cat-Bot/driver.py
 
 
 ### Trouble-shooting
