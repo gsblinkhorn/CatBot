@@ -21,6 +21,8 @@ def generate_html(image_html_list, title_list, author_list, top_com_list):
         return html   
 
 
+########## HELPER FUNCTIONS #############
+    
 # Creates a block of html code containing the arguments 
 def make_block(counter, img_code, title, author, comments):
     block = """
