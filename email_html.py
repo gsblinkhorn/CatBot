@@ -45,7 +45,7 @@ def generate_html(image_html_list, title_list, author_list, top_com_list):
     for i,(img_code, title, author, comments) in enumerate(zip(image_html_list, title_list, author_list, top_com_list)):
         block = """
         <table class="image" align="center" bgcolor="#FFFFFF">
-            <caption align="top"><b><font size="5">""" + str(title) + """<br>
+            <caption align="top"><b><font size="5">""" + str(title) + """
                 - /u/""" + str(author) + """
             </font></b></caption><br>
         """
@@ -66,8 +66,8 @@ def generate_html(image_html_list, title_list, author_list, top_com_list):
         </div>
       </body>
     </html>
-    """ 
-
+    """
+    
     return code
 
 # This function causes images to display on alternating sides of the email message
