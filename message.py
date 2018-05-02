@@ -1,18 +1,17 @@
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
-import reddit_bot as rb #image download module
+import reddit_bot #image download module
 import config #email info
 import email_html #html body info
 import datetime
 import smtplib
 import os
-
 import pickle
 
 def generate_email():
     if(config.DOWNLOAD): #Boolean to bypass download step
-        rb.get_data()
+        reddit_bot.get_data()
 
     # Instance of Date
     now = datetime.datetime.now()
@@ -34,7 +33,7 @@ def generate_email():
 
     # Load tuples
     tuples = []
-    with open('tuple.pickle', 'rb') as file:
+    with open(config.BINARY_FILE, 'rb') as file:
         while True:
             try:
                 tuples.append(pickle.load(file))

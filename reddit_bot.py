@@ -20,7 +20,7 @@ def clean_storage():
    assure_path_exists(config.STORAGE_PATH)
    fileList = os.listdir(config.STORAGE_PATH)
    try:
-       os.remove('tuple.pickle')
+       os.remove(config.BINARY_FILE)
    except FileNotFoundError:
        pass
 
@@ -105,5 +105,5 @@ def get_pic_path(url):
       print("Image download error occured")
 
 def write_tuple(tuple):
-    with open('tuple.pickle', 'ab+') as file:
+    with open(config.BINARY_FILE, 'ab+') as file:
         pickle.dump(tuple, file)
