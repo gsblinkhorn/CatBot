@@ -1,17 +1,18 @@
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
-import datetime
-import get_image
-import smtplib
-import csv
+import reddit_bot as rb #image download module
 import config #email info
 import email_html #html body info
+import datetime
+import smtplib
+import os
 
+import pickle
 
 def generate_email():
     if(config.DOWNLOAD): #Boolean to bypass download step
-        get_image.get_images()
+        rb.get_data()
 
     # Instance of Date
     now = datetime.datetime.now()
@@ -31,20 +32,29 @@ def generate_email():
     msgText = MIMEText('This is the alternative plain text message.')
     msgAlternative.attach(msgText)
 
-    # Extract contents of csv
+    # Load tuples
+    tuples = []
+    with open('tuple.pickle', 'rb') as file:
+        while True:
+            try:
+                tuples.append(pickle.load(file))
+            except (EOFError):
+                break
+
+
+    url_list = []
     title_list = []
     author_list = []
-    url_list = []
     jpg_path_list = []
     top_com_list = []
-    with open(config.CSV, 'r') as f:
-        reader = csv.reader(f)
-        for row in reader:
-            url_list.append(row[0])
-            title_list.append(row[1])
-            author_list.append(row[2])
-            jpg_path_list.append(row[3])
-            top_com_list.append(row[4])
+
+    for tup in tuples:
+        (url, tit, auth, jpg, top) = tup
+        url_list.append(url)
+        title_list.append(tit)
+        author_list.append(auth)
+        jpg_path_list.append(jpg)
+        top_com_list.append(top)
 
     # Generate HTML code for background images and add images to email message
     with open("backgrounds\\logo_gif.gif", 'rb') as pic:
