@@ -41,7 +41,6 @@ def generate_email():
             except (EOFError):
                 break
 
-
     url_list = []
     title_list = []
     author_list = []
@@ -57,12 +56,12 @@ def generate_email():
         top_com_list.append(top)
 
     # Generate HTML code for background images and add images to email message
-    with open("backgrounds\\logo_gif.gif", 'rb') as pic:
+    with open("email_images\\logo_gif.gif", 'rb') as pic:
         msgImage = MIMEImage(pic.read())
         msgImage.add_header('Content-ID', '<logo>')
         msgRoot.attach(msgImage)
 
-    with open("backgrounds\\black_background.png", 'rb') as pic:
+    with open("email_images\\black_background.png", 'rb') as pic:
         msgImage = MIMEImage(pic.read())
         msgImage.add_header('Content-ID', '<bback>')
         msgRoot.attach(msgImage)
