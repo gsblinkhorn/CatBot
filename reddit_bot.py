@@ -46,7 +46,7 @@ def run_reddit():
 
    # Initializes Subreddit instance from multiple subreddits
    subreddits = ["cats","MEOW_IRL","Kittens","TuckedInKitties","Floof",
-                 "CatsInBusinessAttire","CatCircles","CatPictures"]
+                 "CatsInBusinessAttire","CatCircles","CatPictures" , "SupermodelCats"]
    cats = reddit.subreddit('+'.join(subreddits)).top('day', limit=30)
    return cats
 
