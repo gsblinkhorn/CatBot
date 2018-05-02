@@ -3,7 +3,6 @@ DOWNLOAD = True
 
 ## Storage Paths ##
 STORAGE_PATH = ".\\daily_pics"
-CSV = '.\\pic_data.csv'
 
 ## Bot Parameters ##
 BOT_ID = ''
@@ -22,4 +21,4 @@ test_list = [bot]
 USER = ''
 PASS = ''
 FROM = USER
-TO = test_list #Must be list of email addresses 
+TO = test_list #Must be list of email addresses
