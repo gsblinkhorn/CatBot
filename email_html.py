@@ -25,31 +25,53 @@ def generate_html(image_html_list, title_list, author_list, top_com_list):
     
 # Creates a block of html code containing the arguments 
 def make_block(counter, img_code, title, author, comments):
+
+    block = start_table(title, author)    
+    block = insert_image(block, counter, img_code, comments)
+    block = add_border(block) 
+    
+    return block
+
+# Creates table, adds title and author
+def start_table(title, author):
     block = """
-        <table class="image" align="center" bgcolor="#FFFFFF" width="80%">
-            <tr align="center">
-                <th colspan="2"><b><font size="5">""" + str(title) + """
-                    - /u/""" + str(author) + """
-                </font></b></th>
-            </tr>
-            <br>
-    """
-        
-    block = insert_image(block, counter, img_code, comments) + "</table><br><br>"
+            <table class="image" align="center" bgcolor="#FFFFFF" width="100%">
+                <tr>
+                    <th colspan="2"><b><font size="5">""" + str(title) + """
+                        - /u/""" + str(author) + """
+                    </font></b></th>
+                </tr>
+            """
     return block
+    
 
-
-# This function causes images to display on alternating sides of the email message
-def insert_image(block, counter, img_code, comments):
-    if counter % 2 == 0:
-        block += """<tr><td style="padding:0 50px 0 50px;">""" + str(img_code) + """</td>
+# Add black border to block
+def add_border(block):
+    block = """ 
+            <table border="3px" cellpadding="0" cellspacing="0" width="80%">
+            """ + block + """
+            </table><br><br>"""
+    return block
+    
+# Adds an image and comments to a given table and closes the table
+def insert_image(table, counter, img_code, comments):
+    if counter % 2 == 0: # Alternates images on either side of table
+        table += """
+                <tr>
+                    <td align="center" style="padding:0 50px 0 50px;">""" + str(img_code) + """</td>
                     <td align="center">""" + comments + """</td>
-                </tr>"""
+                </tr>
+                </table>
+                """
     else:
-        block += """<tr><td align="center">""" + comments + """</td>
-                        <td style="padding:0 50px 0 50px;">""" + str(img_code) + """</td>
-                </tr>"""
-    return block
+        table += """
+                <tr>
+                    <td align="center">""" + comments + """</td>
+                    <td style="padding:0 50px 0 50px;">""" + str(img_code) + """</td>
+                </tr>
+                </table>
+                """
+    return table
 
 # Retrieves Daily Quote
 def get_quote():
