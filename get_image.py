@@ -1,7 +1,7 @@
 import praw #Reddit API
 import urllib
 import config
-import csv
+import pickle
 import shutil #remove files
 from PIL import Image
 import os
@@ -14,7 +14,7 @@ def get_images():
 
 
 ##### Helper Functions #####
-   
+
 # Remove old pictures from storage file
 def clean_storage():
    print("Cleaning picture storage...")
@@ -22,18 +22,14 @@ def clean_storage():
    fileList = os.listdir(config.STORAGE_PATH)
    for fileName in fileList:
       os.remove(config.STORAGE_PATH+"/"+fileName)
-   with open(config.CSV, "w") as empty: # Removes old CSV data
-      pass
    print("Storage cleaned.")
-   
-   
+
 # Creates a directory for storing pictures if it does not already exist
 def assure_path_exists(path):
    direc =(path)
    if not os.path.isdir(direc):
       os.makedirs(direc)
       print("Directory %s created." %direc)
-      
 
 # Initializes Reddit instance using bot's params
 def run_reddit():
@@ -64,28 +60,28 @@ def get_metadata(cats): #Takes a Subreddit object as an argument
          pic_path = get_pic_path(url)
          comments = get_html_coms(post.comments)
          metadata = (url, title, author, pic_path, comments)
-         
+
          try:
-            store_to_csv(metadata)
-            print("Post stored to CSV")
+            write_tuple(metadata)
+            print("Post stored successfully")
             successCounter += 1
          except:
             print("Storage error occured")
             continue
 
-# Formats comments into single line of HTML code to be directly inserted        
+# Formats comments into single line of HTML code to be directly inserted
 def get_html_coms(comments):
    all_comments = """<font size="3">"""
    for i,com in enumerate(comments):
       if i == 4: #this value denotes number of desired comments to capture
          break
       if len(com.body)<300: #Restricts comments to desired length
-         all_comments += "\"" + com.body + "\"<br> - /u/" 
+         all_comments += "\"" + com.body + "\"<br> - /u/"
          all_comments += "" + com.author.name + "<br><br><br>"
    all_comments += "</font>"
 
    return all_comments
-   
+
 # Downloads image from url and returns file_path to image
 def get_pic_path(url):
    store_file_path = config.STORAGE_PATH + "\\"
@@ -103,11 +99,7 @@ def get_pic_path(url):
       return file_path
    except:
       print("Image download error occured")
-      
 
-# Stores metadata into csv file
-def store_to_csv(post_tuple):
-   csv_file = config.CSV
-   with open(csv_file, 'a', newline='') as o:
-      writer = csv.writer(o)
-      writer.writerow(post_tuple)
+def write_tuple(tuple):
+    with open('tuple.pickle', 'ab+') as file:
+        pickle.dump(tuple, file)
