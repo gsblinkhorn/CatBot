@@ -1,8 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 
-quote_url = 'https://www.brainyquote.com/quote_of_the_day'
-
 # Generates body of Email Message
 def generate_html(image_html_list, title_list, author_list, top_com_list):
     print('Generating HTML')
@@ -10,7 +8,7 @@ def generate_html(image_html_list, title_list, author_list, top_com_list):
     quote = get_quote()
     quote_url_html = "<a href=" +"\"" + quote_url + "\"" + ">BrainyQuote - Quote of the Day</a>"
 
-    # Creates blocks of code for every image
+    # Creates blocks of html code for every image
     blocks = []
     for i,(img_code, title, author, comments) in enumerate(zip(image_html_list, title_list, author_list, top_com_list)):
         blocks.append(make_image_block(i, img_code, title, author, comments))
@@ -47,6 +45,8 @@ def image_html(counter, img_code, comments):
 
 # Retrieves Daily Quote
 def get_quote():
+    quote_url = 'https://www.brainyquote.com/quote_of_the_day'
+
     cont = requests.get(quote_url).content
     soup = BeautifulSoup(cont, 'html.parser')
     image = soup.find('img', {'class': "p-qotd bqPhotoDefault bqPhotoDefaultFw img-responsive"})
