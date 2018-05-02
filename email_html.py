@@ -35,13 +35,13 @@ def make_image_block(counter, img_code, title, author, comments):
 def image_html(counter, img_code, comments):
     if counter % 2 == 0: # Alternates images on either side of table
         table = """
-                <td align="center" style="padding:0 50px 0 50px;">""" + str(img_code) + """</td>
-                <td align="center">""" + comments + """</td>
+                <td width="50%" align="center">""" + str(img_code) + """</td>
+                <td width="50%" align="center">""" + comments + """</td>
                 """
     else:
         table = """
-                <td align="center">""" + comments + """</td>
-                <td align="center" style="padding:0 50px 0 50px;">""" + str(img_code) + """</td>
+                <td width="50%" align="center">""" + comments + """</td>
+                <td width="50%" align="center">""" + str(img_code) + """</td>
                 """
     return table
 
