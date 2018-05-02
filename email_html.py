@@ -41,7 +41,7 @@ def image_html(counter, img_code, comments):
     else:
         table = """
                 <td align="center">""" + comments + """</td>
-                <td style="padding:0 50px 0 50px;">""" + str(img_code) + """</td>
+                <td align="center" style="padding:0 50px 0 50px;">""" + str(img_code) + """</td>
                 """
     return table
 
