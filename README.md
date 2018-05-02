@@ -1,11 +1,17 @@
 # Cat-Bot
 'Cat-Bot' is a Python-powered (Python 3.6), Reddit-scraping application for automatically generating and emailing a cat-themed newsletter, 'The Feline Fanatic'. In order to run the program, download all files into a local directory. With some simple tweaks to the config_sample.py file, the driver file will be ready to execute. If Python 3 is not installed, you will need to download and install that as well. [Download Python 3 here](https://www.python.org/downloads/). This program was designed on a Windows machine. You will need a Reddit bot account to login with and a gmail address to send the message from.
 
+## Third-Party Libraries
+- requests
+- BeautifulSoup
+- PRAW
+- PIL
+
 ## config
 Once you have downloaded config_sample.py, rename it to config.py. This while allow the rest of the scripts to access your configuration variables. .gitignore will ignore your config.py if you create a local repository, as well as the local directory and binary files which the program will create
 
 ### 'Trigger Image Download'
-Boolean used to enable/disable the download step. Images are downloaded from Reddit into local directory 'config.STORAGE_PATH', and their metadata is stored in a binary file 'tuple.pickle'. With DOWNLOAD = False, the program will simply embed the data currently stored in the binary file and local directory. Each download will overwrite the previous contents of these two files.
+Boolean used to enable/disable the download step. Images are downloaded from Reddit into local directory 'config.STORAGE_PATH', and their metadata is stored in a binary file 'config.BINARY_FILE'. With DOWNLOAD = False, the program will simply embed the data currently stored in the binary file and local directory. Each download will overwrite the previous contents of these two files.
 
 ### 'Bot Parameters'
 After creating your own Reddit bot ([Instructions Here](http://pythonforengineers.com/build-a-reddit-bot-part-1/)), store the necessary values here
