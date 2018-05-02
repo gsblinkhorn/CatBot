@@ -15,7 +15,7 @@ def generate_html(image_html_list, title_list, author_list, top_com_list):
     for i,(img_code, title, author, comments) in enumerate(zip(image_html_list, title_list, author_list, top_com_list)):
         blocks.append(make_image_block(i, img_code, title, author, comments))
 
-    with open("email_template.html", "r") as file:
+    with open("templates\email_template.html", "r") as file:
         template = file.read()
         html = template.format(quote, quote_url_html, *blocks)
         return html
@@ -25,7 +25,7 @@ def generate_html(image_html_list, title_list, author_list, top_com_list):
 
 # Creates a block of html code containing the arguments
 def make_image_block(counter, img_code, title, author, comments):
-	with open("email_image_table_template.html", "r") as file:
+	with open("templates\email_image_table_template.html", "r") as file:
 		image_table = image_html(counter, img_code, comments)
 		temp = file.read()
 		html = temp.format(title, author, image_table)
