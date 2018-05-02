@@ -46,7 +46,7 @@ def generate_email():
             jpg_path_list.append(row[3])
             top_com_list.append(row[4])
 
-    # Generate HTML code for images and add images to email message
+    # Generate HTML code for background images and add images to email message
     with open("backgrounds\\logo_gif.gif", 'rb') as pic:
         msgImage = MIMEImage(pic.read())
         msgImage.add_header('Content-ID', '<logo>')
