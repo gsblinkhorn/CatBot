@@ -26,28 +26,22 @@ def generate_html(image_html_list, title_list, author_list, top_com_list):
 # Creates a block of html code containing the arguments
 def make_image_block(counter, img_code, title, author, comments):
 	with open("templates\email_image_table_template.html", "r") as file:
-		image_table = image_html(counter, img_code, comments)
+		image_snippet = image_html(counter, img_code, comments)
 		temp = file.read()
-		html = temp.format(title, author, image_table)
+		html = temp.format(title, author, image_snippet)
 		return html
 
-# Adds an image and comments to a given table and closes the table
+# Formats image and comments into HTML snppet to return
 def image_html(counter, img_code, comments):
     if counter % 2 == 0: # Alternates images on either side of table
         table = """
-                <tr>
-                    <td align="center" style="padding:0 50px 0 50px;">""" + str(img_code) + """</td>
-                    <td align="center">""" + comments + """</td>
-                </tr>
-                </table>
+                <td align="center" style="padding:0 50px 0 50px;">""" + str(img_code) + """</td>
+                <td align="center">""" + comments + """</td>
                 """
     else:
         table = """
-                <tr>
-                    <td align="center">""" + comments + """</td>
-                    <td style="padding:0 50px 0 50px;">""" + str(img_code) + """</td>
-                </tr>
-                </table>
+                <td align="center">""" + comments + """</td>
+                <td style="padding:0 50px 0 50px;">""" + str(img_code) + """</td>
                 """
     return table
 
