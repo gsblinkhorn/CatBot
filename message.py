@@ -1,18 +1,18 @@
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
-import datetime
-import get_image
-import smtplib
-import os
+import reddit_bot as rb #image download module
 import config #email info
 import email_html #html body info
-import pickle
+import datetime
+import smtplib
+import os
 
+import pickle
 
 def generate_email():
     if(config.DOWNLOAD): #Boolean to bypass download step
-        get_image.get_images()
+        rb.get_data()
 
     # Instance of Date
     now = datetime.datetime.now()
@@ -40,7 +40,7 @@ def generate_email():
                 tuples.append(pickle.load(file))
             except (EOFError):
                 break
-    os.remove('tuple.pickle')
+
 
     url_list = []
     title_list = []
@@ -55,7 +55,6 @@ def generate_email():
         author_list.append(auth)
         jpg_path_list.append(jpg)
         top_com_list.append(top)
-
 
     # Generate HTML code for images and add images to email message
     with open("backgrounds\\logo_gif.gif", 'rb') as pic:
