@@ -15,7 +15,7 @@ def generate_html(image_html_list, title_list, author_list, top_com_list):
     for i,(img_code, title, author, comments) in enumerate(zip(image_html_list, title_list, author_list, top_com_list)):
         blocks.append(make_image_block(i, img_code, title, author, comments))
 
-    with open("templates\email_template.html", "r") as file:
+    with open("templates/email_template.html", "r") as file:
         template = file.read()
         html = template.format(quote, quote_url_html, *blocks)
         return html
@@ -25,7 +25,7 @@ def generate_html(image_html_list, title_list, author_list, top_com_list):
 
 # Creates a block of html code containing the arguments
 def make_image_block(counter, img_code, title, author, comments):
-	with open("templates\email_image_table_template.html", "r") as file:
+	with open("templates/email_image_table_template.html", "r") as file:
 		image_snippet = image_html(counter, img_code, comments)
 		temp = file.read()
 		html = temp.format(title, author, image_snippet)
@@ -49,6 +49,7 @@ def image_html(counter, img_code, comments):
 def get_quote():
     cont = requests.get(quote_url).content
     soup = BeautifulSoup(cont, 'html.parser')
-    image = soup.find('img', {'class': "p-qotd bqPhotoDefault bqPhotoDefaultFw img-responsive"})
-
+    class_var = "p-qotd bqPhotoDefault bqPhotoDefaultFw img-responsive delayedPhotoLoad"
+    image = soup.find('img', {'class': class_var})
+    # print(soup)
     return(str(image.get('alt', '')))

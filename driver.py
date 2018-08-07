@@ -10,6 +10,8 @@ def main():
     server.starttls()
 
     print("Connection successful\nLogging in...")
+    print(config.USER)
+    print(config.PASS)
     server.login(config.USER, config.PASS)
 
     print("Login successful\nGenerating email...")
