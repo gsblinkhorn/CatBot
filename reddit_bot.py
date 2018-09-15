@@ -88,7 +88,7 @@ def get_html_coms(comments):
 
 # Downloads image from url and returns file_path to image
 def get_pic_path(url):
-   store_file_path = config.STORAGE_PATH + "\\"
+   store_file_path = config.STORAGE_PATH + "/"
    filename = url.split('/')[-1] # uses last part of address as file name
    file_path = store_file_path + filename
 
