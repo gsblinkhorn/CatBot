@@ -36,6 +36,9 @@ This script can be setup to run automatically on any computer with a reliable in
 
 ### job.sh - Automatically trigger this script with a cron job
 #!/usr/bin/env bash
+
 cd ~/CatBot
+
 python3 driver.py
+
 
