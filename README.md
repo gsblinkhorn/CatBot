@@ -1,6 +1,8 @@
 # Cat-Bot
 'Cat-Bot' is a Python-powered (Python 3.6), Reddit-scraping application for automatically generating and emailing a cat-themed newsletter, 'The Feline Fanatic'. In order to run the program, clone this repository. With some simple tweaks to the config_sample.py file, the driver file will be ready to execute. If Python 3 is not installed, you will need to download and install that as well. [Download Python 3 here](https://www.python.org/downloads/). This program was designed on a Linux machine. You will need a Reddit bot account to login with and a gmail address to send the message from.
 
+### An example copy of The Feline Fanatic is located at the bottom of this document
+
 ## Third-Party Libraries
 - requests
 - BeautifulSoup
@@ -41,4 +43,6 @@ cd ~/CatBot
 
 python3 driver.py
 
+# EXAMPLE FELINE FANATIC
+![Feline Fanatic Example](https://github.com/gsblinkhorn/CatBot/blob/master/feline_fanatic_example.png)
 
