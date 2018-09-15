@@ -2,7 +2,7 @@
 DOWNLOAD = True
 
 ## Storage Paths ##
-STORAGE_PATH = ".\\daily_pics"
+STORAGE_PATH = "./daily_pics"
 BINARY_FILE = "tuple.pickle"
 
 ## Bot Parameters ##
