@@ -1,5 +1,5 @@
 # Cat-Bot
-'Cat-Bot' is a Python-powered (Python 3.6), Reddit-scraping application for automatically generating and emailing a cat-themed newsletter, 'The Feline Fanatic'. In order to run the program, download all files into a local directory. With some simple tweaks to the config_sample.py file, the driver file will be ready to execute. If Python 3 is not installed, you will need to download and install that as well. [Download Python 3 here](https://www.python.org/downloads/). This program was designed on a Windows machine. You will need a Reddit bot account to login with and a gmail address to send the message from.
+'Cat-Bot' is a Python-powered (Python 3.6), Reddit-scraping application for automatically generating and emailing a cat-themed newsletter, 'The Feline Fanatic'. In order to run the program, clone this repository. With some simple tweaks to the config_sample.py file, the driver file will be ready to execute. If Python 3 is not installed, you will need to download and install that as well. [Download Python 3 here](https://www.python.org/downloads/). This program was designed on a Linux machine. You will need a Reddit bot account to login with and a gmail address to send the message from.
 
 ## Third-Party Libraries
 - requests
@@ -8,7 +8,7 @@
 - PIL
 
 ## config
-Once you have downloaded config_sample.py, rename it to config.py. This while allow the rest of the scripts to access your configuration variables. .gitignore will ignore your config.py if you create a local repository, as well as the local directory and binary files which the program will create
+Once you have downloaded config_sample.py, rename it to config.py. This will allow the rest of the scripts to access your configuration variables. .gitignore will ignore your config.py if you create a local repository, as well as the local directory and binary files which the program will create
 
 ### 'Trigger Image Download'
 Boolean used to enable/disable the download step. Images are downloaded from Reddit into local directory 'config.STORAGE_PATH', and their metadata is stored in a binary file 'config.BINARY_FILE'. With DOWNLOAD = False, the program will simply embed the data currently stored in the binary file and local directory. Each download will overwrite the previous contents of these two files.
@@ -27,26 +27,15 @@ USER & PASS are the username and password to the email account you wish to send 
 
 2 - Initialize your config file (Bot params, email params, mailing list)
 
-3 - Execute the driver.py file.
+3 - Run the driver.py file.
 
 Print-outs should appear in the terminal as the program executes. Upon successful completion, the email should be received by all addresses in your TO list. The program will terminate after successfully sending the email.
 
-## Raspberry Pi as a Dedicated Computer
-This script can be setup to run automatically on any computer with a reliable internet connection. Rather than use my laptop, I took this as an opportuntiy to get and learn how to use a Raspberry Pi. After setting up the Raspbian OS, I cloned the Github repository and tried using Cron to execute my python driver.py file at a given time - the command failed to  execute properly despite numerous changes made to it, but I eventually found a work-around. Rather than execute the driver file directly (python /path/to/file/driver.py), I created a bash script called job.sh that the crontab command executes instead (crontab command : * * * * * ~/job.sh).
+## Set Script to Run Automatically
+This script can be setup to run automatically on any computer with a reliable internet connection.  Rather than execute the driver file directly (python /path/to/file/driver.py), I created a bash script called job.sh that the crontab command executes instead (crontab command : * * * * * ~/job.sh).
 
-### job.sh - Pulls latest source code and executes
-#!/bin/sh
+### job.sh - Automatically trigger this script with a cron job
+#!/usr/bin/env bash
+cd ~/CatBot
+python3 driver.py
 
-python --version
-
-cd /path/to/local/repo/Cat-Bot
-
-git pull origin master
-
-python /path/to/local/repo/Cat-Bot/driver.py
-
-
-### Trouble-shooting
-- Make sure Python 3 is your default Python. You can change the python version system-wide ([Instructions here](https://linuxconfig.org/how-to-change-from-default-to-alternative-python-version-on-debian-linux))
-- Change permissions of job.sh so that it is an executable file
-- appending ">> /path/to/log/driver.log" to the command in job.sh will redirect the output of the program to a log file which can be reviewed for error messages if it fails to execute properly
